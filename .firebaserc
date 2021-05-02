@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "weddingapp-cbd8a": {
+      "hosting": {
+        "weddingApp": [
+          "weddingapp-cbd8a"
+        ]
+      }
+    }
+  }
+}

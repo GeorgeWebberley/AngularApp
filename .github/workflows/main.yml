@@ -21,9 +21,9 @@ jobs:
           name: dist
           path: dist
       - name: Run lint
-        run: npm lint
+        run: npm run lint
       - name: Run tests
-        run: npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
   deploy:
     name: Deploy
     needs: build

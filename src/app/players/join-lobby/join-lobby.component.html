@@ -1,0 +1,34 @@
+<form [formGroup]="joinLobbyForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Enter the lobby code!</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="lobbyCode"
+      placeholder="Lobby code"
+    />
+  </div>
+  <button
+    (click)="checkLobby()"
+    *ngIf="!lobbyCodeValid"
+    class="btn btn-primary"
+  >
+    Continue
+  </button>
+  <div *ngIf="lobbyCodeValid" class="form-group">
+    <label for="exampleInputEmail1">Enter your name!</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="playerName"
+      placeholder="Name"
+    />
+  </div>
+  <button
+    *ngIf="lobbyCodeValid"
+    type="submit"
+    [disabled]="!joinLobbyForm.valid"
+  >
+    Submit
+  </button>
+</form>

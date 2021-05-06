@@ -1,6 +1,7 @@
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-join-lobby',
@@ -12,6 +13,8 @@ export class JoinLobbyComponent implements OnInit {
   displayError = false;
 
   key: string;
+  code: string;
+  playerName: string;
 
   joinLobbyForm = new FormGroup({
     lobbyCode: new FormControl(''),
@@ -20,27 +23,25 @@ export class JoinLobbyComponent implements OnInit {
 
   test: any;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private router: Router) {}
 
   ngOnInit(): void {}
 
   checkLobby(): void {
-    const code = this.joinLobbyForm.value.lobbyCode.toUpperCase();
+    this.code = this.joinLobbyForm.value.lobbyCode.toUpperCase();
 
-    let test = this.gameService.getLobby(code);
+    let test = this.gameService.getLobby(this.code);
     console.log('test', test);
 
     this.gameService
-      .getLobby(code)
+      .getLobby(this.code)
       .snapshotChanges()
       .subscribe((result) => {
         if (result.length > 0) {
-          console.log('CODE FOUND');
           this.displayError = false;
           this.lobbyCodeValid = true;
           this.key = result[0].key;
         } else {
-          console.log('ERROR');
           this.displayError = true;
         }
       });
@@ -50,10 +51,13 @@ export class JoinLobbyComponent implements OnInit {
     if (this.joinLobbyForm.invalid) {
       return;
     } else if (this.key) {
+      this.playerName = this.joinLobbyForm.value.playerName.toUpperCase();
       this.gameService.addPlayer(
         this.key,
-        this.joinLobbyForm.value.playerName.toUpperCase()
+        this.playerName
       );
+
+      this.router.navigate(['/game/' + this.code, this.playerName])
     }
   }
 }

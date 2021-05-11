@@ -1,3 +1,5 @@
+import { PlayerState } from './state/player-state/player.state';
+import { HostState } from './state/host-state/host.state';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -15,6 +17,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [AppComponent, LandingComponent],
@@ -29,6 +32,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
+    NgxsModule.forRoot([HostState, PlayerState], {
+      developmentMode: !environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

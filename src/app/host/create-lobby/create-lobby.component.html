@@ -1,13 +1,21 @@
 <div class="d-flex w-100 h-100 justify-content-center align-items-center">
-    <div class="box d-flex position-relative justify-content-center align-items-center">
-        <div class="d-flex flex-column align-items-center">
-            <h1>The lobby code is {{lobbyCode}}</h1>
-            <button class="btn btn-primary">START</button>
-        </div>
-        <div *ngFor="let player of playerArray">
-            <div class="position-absolute name" [ngStyle]="styleObject(player)">
-            {{player.name}}
-            </div>
-        </div>
+  <div
+    class="
+      box
+      d-flex
+      position-relative
+      justify-content-center
+      align-items-center
+    "
+  >
+    <div class="d-flex flex-column align-items-center">
+      <h1>The lobby code is {{ lobbyCode }}</h1>
+      <button (click)="startGame()" class="btn btn-primary">START</button>
     </div>
+    <div *ngFor="let player of playerArray">
+      <div class="position-absolute name" [ngStyle]="styleObject(player)">
+        {{ player.name }}
+      </div>
+    </div>
+  </div>
 </div>

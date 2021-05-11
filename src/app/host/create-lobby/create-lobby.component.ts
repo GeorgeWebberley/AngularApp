@@ -1,6 +1,9 @@
+import { Router } from '@angular/router';
+import { SetPlayers } from './../../state/host-state/host.action';
 import { Player } from './../../entities/Player';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-create-lobby',
@@ -13,14 +16,11 @@ export class CreateLobbyComponent implements OnInit {
 
   playerArray = [];
 
-  // bottomLeft = 0;
-  // bottomRight = 0;
-  // topRight = 0;
-  // topLeft = 0;
-  // rotateLeft = 0;
-  // rotateRight = 0;
-
-  constructor(private gameService: GameService) {}
+  constructor(
+    private gameService: GameService,
+    private store: Store,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.lobbyCode = this.generateCode();
@@ -69,7 +69,6 @@ export class CreateLobbyComponent implements OnInit {
     return position;
   }
 
-
   getCSSRotation(): number {
     let firstPosition = Math.floor(Math.random() * 2);
 
@@ -100,5 +99,13 @@ export class CreateLobbyComponent implements OnInit {
       );
     }
     return result.join('');
+  }
+
+  startGame(): void {
+    let array = this.playerArray.map((player) => {
+      return { name: player['name'], score: player['score'] };
+    });
+    this.store.dispatch(new SetPlayers(array));
+    this.router.navigate(['/host/quiz-lobby']);
   }
 }

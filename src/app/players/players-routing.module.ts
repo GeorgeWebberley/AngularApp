@@ -8,7 +8,7 @@ import { PlayersComponent } from './players.component';
 const routes: Routes = [
   { path: '', component: PlayersComponent },
   { path: 'join-lobby', component: JoinLobbyComponent },
-  { path: 'questions', component: AnswerQuestionsComponent },
+  { path: 'lobby/:id', component: AnswerQuestionsComponent },
 ];
 
 @NgModule({

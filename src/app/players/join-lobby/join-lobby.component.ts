@@ -103,7 +103,7 @@ export class JoinLobbyComponent implements OnInit {
       this.store.dispatch(new SetPlayer(this.playerName));
       this.store.dispatch(new SetLobby(this.code));
 
-      this.router.navigate(['/game/' + this.code, this.playerName]);
+      this.router.navigate(['/players/lobby/' + this.code]);
     }
   }
 }

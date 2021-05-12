@@ -19,3 +19,14 @@
     </div>
   </div>
 </div>
+
+<div
+  *ngIf="error"
+  class="top alert alert-danger alert-dismissible fade show"
+  role="alert"
+>
+  No players in the lobby! Wait for some to join.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

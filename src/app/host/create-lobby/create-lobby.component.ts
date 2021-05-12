@@ -13,6 +13,7 @@ import { Store } from '@ngxs/store';
 export class CreateLobbyComponent implements OnInit {
   lobbyCode: string;
   players: Player[];
+  error = false;
 
   playerArray = [];
 
@@ -46,9 +47,9 @@ export class CreateLobbyComponent implements OnInit {
                   playerObject['score'] = 0;
                   playerObject['name'] = player.name;
                   this.playerArray.push(playerObject);
+                  this.error = false;
                 }
               });
-              console.log(this.playerArray);
             }
           } else {
             console.log('ERROR');
@@ -105,6 +106,10 @@ export class CreateLobbyComponent implements OnInit {
     let array = this.playerArray.map((player) => {
       return { name: player['name'], score: player['score'] };
     });
+    if (array.length == 0) {
+      this.error = true;
+      return;
+    }
     this.store.dispatch(new SetPlayers(array));
     this.router.navigate(['/host/quiz-lobby']);
   }

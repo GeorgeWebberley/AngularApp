@@ -4,14 +4,18 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 export class PlayerStateModel {
   playerName: string;
+  playerId: string;
   lobbyCode: string;
+  lobbyId: string;
 }
 
 @State<PlayerStateModel>({
   name: 'player',
   defaults: {
     playerName: undefined,
+    playerId: undefined,
     lobbyCode: undefined,
+    lobbyId: undefined,
   },
 })
 @Injectable()
@@ -31,18 +35,18 @@ export class PlayerState {
   @Action(SetLobby)
   setLobby(
     { getState, setState }: StateContext<PlayerStateModel>,
-    { code }
+    { code, id }
   ): any {
     const state = getState();
-    setState({ ...state, lobbyCode: code });
+    setState({ ...state, lobbyCode: code, lobbyId: id });
   }
 
   @Action(SetPlayer)
   setPlayer(
     { getState, setState }: StateContext<PlayerStateModel>,
-    { name }
+    { name, id }
   ): any {
     const state = getState();
-    setState({ ...state, playerName: name });
+    setState({ ...state, playerName: name, playerId: id });
   }
 }

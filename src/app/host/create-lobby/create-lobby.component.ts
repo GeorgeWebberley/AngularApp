@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { SetPlayers } from './../../state/host-state/host.action';
+import { SetLobby, SetPlayers } from './../../state/host-state/host.action';
 import { Player } from './../../entities/Player';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +12,7 @@ import { Store } from '@ngxs/store';
 })
 export class CreateLobbyComponent implements OnInit {
   lobbyCode: string;
+  lobbyId: string;
   players: Player[];
   error = false;
 
@@ -31,6 +32,7 @@ export class CreateLobbyComponent implements OnInit {
         .valueChanges()
         .subscribe((result) => {
           if (result.length > 0) {
+            this.lobbyId = result[0].id;
             this.players = result[0].players;
             if (this.players) {
               Object.values(this.players).forEach((player) => {
@@ -111,6 +113,7 @@ export class CreateLobbyComponent implements OnInit {
       return;
     }
     this.store.dispatch(new SetPlayers(array));
+    this.store.dispatch(new SetLobby(this.lobbyCode, this.lobbyId));
     this.router.navigate(['/host/quiz-lobby']);
   }
 }

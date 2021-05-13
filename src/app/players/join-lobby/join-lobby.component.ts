@@ -75,9 +75,6 @@ export class JoinLobbyComponent implements OnInit {
   checkLobby(): void {
     this.code = this.joinLobbyForm.value.lobbyCode.toUpperCase();
 
-    let test = this.gameService.getLobby(this.code);
-    console.log('test', test);
-
     this.gameService
       .getLobby(this.code)
       .snapshotChanges()
@@ -92,18 +89,18 @@ export class JoinLobbyComponent implements OnInit {
       });
   }
 
-  submit(): void {
+  async submit(): Promise<void> {
     if (this.joinLobbyForm.invalid) {
       return;
     } else if (this.key) {
       this.playerName = this.joinLobbyForm.value.playerName.toUpperCase();
-      this.gameService.addPlayer(this.key, this.playerName);
+      this.gameService.addPlayer(this.key, this.playerName).then((result) => {
+        this.store.dispatch(new SetPlayer(this.playerName, result.key));
+        this.store.dispatch(new SetLobby(this.code, this.key));
+        this.router.navigate(['/players/lobby/' + this.code]);
+      });
 
       // Set the player state
-      this.store.dispatch(new SetPlayer(this.playerName));
-      this.store.dispatch(new SetLobby(this.code));
-
-      this.router.navigate(['/players/lobby/' + this.code]);
     }
   }
 }

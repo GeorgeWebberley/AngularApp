@@ -1,0 +1,39 @@
+.question-title {
+  font-family: "Reggae One", cursive;
+  color: white;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.answer-container {
+  width: 100%;
+  padding: 4vh 1.5rem;
+}
+
+.answer {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: "Reggae One", cursive;
+  color: white;
+  font-size: 4vh;
+  line-height: 2.5rem;
+}
+
+.rounded {
+  border-radius: 15px !important;
+}
+
+.one {
+  background-color: red;
+}
+.two {
+  background-color: blue;
+}
+.three {
+  background-color: green;
+}
+.four {
+  background-color: orange;
+}

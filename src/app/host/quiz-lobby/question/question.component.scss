@@ -1,0 +1,49 @@
+.title {
+  font-family: "Reggae One", cursive;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  position: absolute;
+  top: 50px;
+}
+
+.margin-top {
+  margin-top: 150px;
+}
+
+.answer-container {
+  width: 100%;
+  padding: 4rem 3rem;
+}
+
+.answer {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: "Reggae One", cursive;
+  color: white;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.rounded {
+  border-radius: 15px !important;
+}
+
+.one {
+  background-color: red;
+}
+.two {
+  background-color: blue;
+}
+.three {
+  background-color: green;
+}
+.four {
+  background-color: orange;
+}
+
+.container {
+  margin-top: 50px;
+  width: 300px;
+}

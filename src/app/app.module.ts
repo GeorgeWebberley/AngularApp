@@ -17,7 +17,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule } from '@angular/forms';
+// State management
 import { NgxsModule } from '@ngxs/store';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 @NgModule({
   declarations: [AppComponent, LandingComponent],
@@ -35,8 +37,10 @@ import { NgxsModule } from '@ngxs/store';
     NgxsModule.forRoot([HostState, PlayerState], {
       developmentMode: !environment.production,
     }),
+    NgxsStoragePluginModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}

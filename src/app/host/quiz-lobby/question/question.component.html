@@ -1,0 +1,39 @@
+<div class="d-flex flex-column align-items-center justify-content-center p-5">
+  <h1
+    [@centerToTop]="firstView ? 'center' : 'top'"
+    class="text-white text-center title my-5"
+  >
+    {{ currentQuestion.question }}
+  </h1>
+
+  <div class="w-100 margin-top">
+    <div class="row mb-1 w-100">
+      <div [@answerPop]="firstView ? 'left' : 'visible'" class="col-6 p-3">
+        <div class="answer-container h-100 rounded one">
+          <div class="answer">{{ answer(1) }}</div>
+        </div>
+      </div>
+      <div [@answerPop]="firstView ? 'right' : 'visible'" class="col-6 p-3">
+        <div class="answer-container h-100 rounded two">
+          <div class="answer">{{ answer(2) }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row w-100">
+      <div [@answerPop]="firstView ? 'left' : 'visible'" class="col-6 p-3">
+        <div class="answer-container h-100 rounded three">
+          <div class="answer">{{ answer(3) }}</div>
+        </div>
+      </div>
+      <div [@answerPop]="firstView ? 'right' : 'visible'" class="col-6 p-3">
+        <div class="answer-container h-100 rounded four">
+          <div class="answer">{{ answer(4) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="timer" class="container">
+    <ng-lottie [options]="options"></ng-lottie>
+  </div>
+</div>

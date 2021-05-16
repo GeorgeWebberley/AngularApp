@@ -1,0 +1,35 @@
+<div class="vh-100 vw-100 d-flex justify-content-center align-items-center">
+  <h1
+    [@titleAnimation]
+    *ngIf="introductionText"
+    class="quiz-title text-white text-center"
+  >
+    And now, the final results are...
+  </h1>
+  <div class="d-flex h-100 justify-content-center" *ngIf="podium">
+    <div
+      [@podiumPop]
+      *ngIf="players.length >= 3 && third"
+      class="third d-flex flex-column align-items-center"
+    >
+      <h1 class="bronze quiz-title">3rd</h1>
+      <h2 class="quiz-title text-white">{{ players[2].name }}</h2>
+    </div>
+    <div
+      [@podiumPop]
+      *ngIf="players.length >= 2 && second"
+      class="second d-flex flex-column align-items-center"
+    >
+      <h1 class="silver quiz-title">2nd</h1>
+      <h2 class="quiz-title text-white">{{ players[1].name }}</h2>
+    </div>
+    <div
+      [@podiumPop]
+      *ngIf="players.length >= 1 && first"
+      class="first d-flex flex-column align-items-center"
+    >
+      <h1 class="gold quiz-title">1st</h1>
+      <h2 class="quiz-title text-white">{{ players[0].name }}</h2>
+    </div>
+  </div>
+</div>

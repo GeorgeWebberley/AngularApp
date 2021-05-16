@@ -1,0 +1,30 @@
+<div class="party-background vw-100 vh-100">
+  <app-countdown
+    *ngIf="countdownScreen"
+    (valueEmitter)="startNextQuestion()"
+  ></app-countdown>
+  <app-question
+    *ngIf="questionScreen"
+    (questionFinishedEmitter)="questionFinished()"
+    [currentQuestion]="currentQuestion"
+  ></app-question>
+  <app-correct-answer
+    (answerFinishedEmitter)="answerFinished()"
+    *ngIf="answerScreen"
+    [correctAnswer]="correctAnswer"
+    [image]="currentQuestion.image"
+  ></app-correct-answer>
+  <app-results-screen
+    (resultsFinishedEmitter)="resultsFinished()"
+    *ngIf="resultsScreen"
+    [players]="players"
+    [exitButton]="exitButton"
+  ></app-results-screen>
+
+  <app-final-results
+    *ngIf="finalResults"
+    (finishedPodium)="podiumFinished()"
+    [players]="players"
+  >
+  </app-final-results>
+</div>

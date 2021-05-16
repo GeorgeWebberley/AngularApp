@@ -1,0 +1,8 @@
+<div class="vh-100 vw-100 party-background">
+  <app-loading-screen *ngIf="loading"></app-loading-screen>
+  <app-answer-question
+    (answerEmitter)="postAnswer($event)"
+    [currentQuestion]="currentQuestion"
+    *ngIf="!loading"
+  ></app-answer-question>
+</div>

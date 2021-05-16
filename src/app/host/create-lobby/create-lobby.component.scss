@@ -1,0 +1,17 @@
+.box {
+  height: 80%;
+  width: 80%;
+}
+
+.name {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

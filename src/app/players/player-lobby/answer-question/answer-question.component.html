@@ -1,0 +1,30 @@
+<div *ngIf="currentQuestion" class="quiz-text text-white text-center mt-4">
+  {{ currentQuestion.question }}
+</div>
+
+<div class="d-flex flex-column align-items-center justify-content-center p-5">
+  <div
+    class="answer-container mb-4 h-100 rounded one pointer"
+    (click)="userAnswered(1)"
+  >
+    <div class="answer">{{ answer(1) }}</div>
+  </div>
+  <div
+    class="answer-container mb-4 h-100 rounded two pointer"
+    (click)="userAnswered(2)"
+  >
+    <div class="answer">{{ answer(2) }}</div>
+  </div>
+  <div
+    class="answer-container mb-4 h-100 rounded three pointer"
+    (click)="userAnswered(3)"
+  >
+    <div class="answer">{{ answer(3) }}</div>
+  </div>
+  <div
+    class="answer-container mb-4 h-100 rounded four pointer"
+    (click)="userAnswered(4)"
+  >
+    <div class="answer">{{ answer(4) }}</div>
+  </div>
+</div>

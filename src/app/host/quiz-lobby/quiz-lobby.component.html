@@ -12,11 +12,19 @@
     (answerFinishedEmitter)="answerFinished()"
     *ngIf="answerScreen"
     [correctAnswer]="correctAnswer"
+    [image]="currentQuestion.image"
   ></app-correct-answer>
   <app-results-screen
     (resultsFinishedEmitter)="resultsFinished()"
     *ngIf="resultsScreen"
     [players]="players"
-    [oldScores]="oldScores"
+    [exitButton]="exitButton"
   ></app-results-screen>
+
+  <app-final-results
+    *ngIf="finalResults"
+    (finishedPodium)="podiumFinished()"
+    [players]="players"
+  >
+  </app-final-results>
 </div>

@@ -1,33 +1,46 @@
-<div class="d-flex flex-column align-items-center justify-content-center p-5">
+<div
+  class="
+    d-flex
+    flex-column
+    align-items-center
+    justify-content-center
+    question-container
+  "
+>
   <h1
+    *ngIf="!mobile"
     [@centerToTop]="firstView ? 'center' : 'top'"
-    class="text-white text-center title my-5"
+    class="text-white text-center title"
   >
+    {{ currentQuestion.question }}
+  </h1>
+  >
+  <h1 *ngIf="mobile" class="text-white text-center title">
     {{ currentQuestion.question }}
   </h1>
 
   <div class="w-100 margin-top">
     <div class="row mb-1 w-100">
-      <div [@answerPop]="firstView ? 'left' : 'visible'" class="col-6 p-3">
+      <div [@answerPop]="firstView ? 'left' : 'visible'" class="col-md-6 p-3">
         <div class="answer-container h-100 rounded one">
-          <div class="answer">{{ answer(1) }}</div>
+          <div class="quiz-text text-white">{{ answer(1) }}</div>
         </div>
       </div>
-      <div [@answerPop]="firstView ? 'right' : 'visible'" class="col-6 p-3">
+      <div [@answerPop]="firstView ? 'right' : 'visible'" class="col-md-6 p-3">
         <div class="answer-container h-100 rounded two">
-          <div class="answer">{{ answer(2) }}</div>
+          <div class="quiz-text text-white">{{ answer(2) }}</div>
         </div>
       </div>
     </div>
     <div class="row w-100">
-      <div [@answerPop]="firstView ? 'left' : 'visible'" class="col-6 p-3">
+      <div [@answerPop]="firstView ? 'left' : 'visible'" class="col-md-6 p-3">
         <div class="answer-container h-100 rounded three">
-          <div class="answer">{{ answer(3) }}</div>
+          <div class="quiz-text text-white">{{ answer(3) }}</div>
         </div>
       </div>
-      <div [@answerPop]="firstView ? 'right' : 'visible'" class="col-6 p-3">
+      <div [@answerPop]="firstView ? 'right' : 'visible'" class="col-md-6 p-3">
         <div class="answer-container h-100 rounded four">
-          <div class="answer">{{ answer(4) }}</div>
+          <div class="quiz-text text-white">{{ answer(4) }}</div>
         </div>
       </div>
     </div>

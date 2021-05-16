@@ -12,6 +12,7 @@ import { QuestionComponent } from './quiz-lobby/question/question.component';
 
 import player from 'lottie-web';
 import { CorrectAnswerComponent } from './quiz-lobby/correct-answer/correct-answer.component';
+import { FinalResultsComponent } from './quiz-lobby/final-results/final-results.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler.
@@ -28,6 +29,7 @@ export function playerFactory() {
     QuestionComponent,
     ResultsScreenComponent,
     CorrectAnswerComponent,
+    FinalResultsComponent,
   ],
   imports: [
     CommonModule,

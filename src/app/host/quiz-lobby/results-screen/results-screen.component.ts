@@ -55,9 +55,11 @@ import {
 })
 export class ResultsScreenComponent implements OnInit {
   @Input() players: Player[];
+  @Input() exitButton: boolean;
   @Output() resultsFinishedEmitter = new EventEmitter();
 
   startAnimation = false;
+  displayButton = false;
 
   constructor() {}
 
@@ -71,7 +73,15 @@ export class ResultsScreenComponent implements OnInit {
 
   pause(): void {
     setTimeout(() => {
-      this.resultsFinishedEmitter.emit();
+      if (this.exitButton) {
+        this.displayButton = true;
+      } else {
+        this.resultsFinishedEmitter.emit();
+      }
     }, 3000);
+  }
+
+  exitGame(): void {
+    console.log('GAME FINISHED!!');
   }
 }

@@ -8,6 +8,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class CorrectAnswerComponent implements OnInit {
   @Output() answerFinishedEmitter = new EventEmitter();
   @Input() correctAnswer: any;
+  @Input() image: string;
+
   title = true;
   constructor() {}
 
@@ -21,6 +23,6 @@ export class CorrectAnswerComponent implements OnInit {
   showResults(): void {
     setTimeout(() => {
       this.answerFinishedEmitter.emit();
-    }, 3000);
+    }, 7000);
   }
 }

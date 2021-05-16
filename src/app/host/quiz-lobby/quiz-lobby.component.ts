@@ -1,5 +1,3 @@
-import { Answer } from './../../entities/Answer';
-import { GetPlayers } from './../../state/host-state/host.action';
 import { Player } from './../../entities/Player';
 import { HostState } from './../../state/host-state/host.state';
 import { Question } from './../../entities/Question';
@@ -18,6 +16,7 @@ export class QuizLobbyComponent implements OnInit {
   resultsScreen = false;
   questionScreen = false;
   answerScreen = false;
+  finalResults = false;
 
   questions: Question[];
   questionNumber = 0;
@@ -29,6 +28,13 @@ export class QuizLobbyComponent implements OnInit {
   players: Player[];
   oldScores: Player[];
 
+  backgroundSong: any;
+  audiofader: any;
+
+  exitButton = false;
+
+  // testPlayers: any;
+
   @Select(HostState) state: Observable<any>;
 
   constructor(private gameService: GameService, private store: Store) {}
@@ -39,6 +45,7 @@ export class QuizLobbyComponent implements OnInit {
       .valueChanges()
       .subscribe((data) => {
         this.questions = data;
+        console.log('questions', this.questions);
       });
 
     this.state.subscribe((data) => {
@@ -54,15 +61,141 @@ export class QuizLobbyComponent implements OnInit {
         });
     });
 
+    // TESTING
+
+    // this.testPlayers = [
+    //   {
+    //     name: 'George',
+    //     score: 5,
+    //   },
+    //   {
+    //     name: 'Kia',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Cleo',
+    //     score: 8,
+    //   },
+    //   {
+    //     name: 'Louie',
+    //     score: 3,
+    //   },
+    //   {
+    //     name: 'Will',
+    //     score: 1,
+    //   },
+    //   {
+    //     name: 'Tom',
+    //     score: 5,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    //   {
+    //     name: 'Benji',
+    //     score: 6,
+    //   },
+    // ];
+
+    // ----------------------------
+
     this.showCountdownScreen();
   }
 
   startNextQuestion(): void {
     this.questionNumber++;
     this.currentQuestion = this.getNextQuestion();
-
+    this.backgroundSong = new Audio();
+    if (this.currentQuestion.song) {
+      this.backgroundSong.src = 'assets/sounds/' + this.currentQuestion.song;
+    } else {
+      this.backgroundSong.src = 'assets/sounds/jazz.mp3';
+    }
+    this.backgroundSong.volume = 1;
+    this.backgroundSong.play();
     this.showQuestionScreen();
     this.gameService.setCurrentQuestion(this.lobbyId, this.currentQuestion);
+  }
+
+  fadeAndStopSong(): void {
+    this.audiofader = setInterval(() => {
+      // When volume at 0.1 stop all the intervalling
+      if (this.backgroundSong.volume <= 0.1) {
+        this.backgroundSong.pause();
+        clearInterval(this.audiofader);
+      } else {
+        this.backgroundSong.volume -= 0.1;
+      }
+    }, 200);
   }
 
   getNextQuestion(): Question {
@@ -84,10 +217,20 @@ export class QuizLobbyComponent implements OnInit {
   }
 
   resultsFinished(): void {
-    this.showCountdownScreen();
+    if (this.questionNumber + 1 <= this.questions.length) {
+      this.fadeAndStopSong();
+      this.showCountdownScreen();
+    } else {
+      this.showFinalResults();
+    }
   }
 
   answerFinished(): void {
+    this.showResultsScreen();
+  }
+
+  podiumFinished(): void {
+    this.exitButton = true;
     this.showResultsScreen();
   }
 
@@ -118,5 +261,13 @@ export class QuizLobbyComponent implements OnInit {
     this.countdownScreen = true;
     this.resultsScreen = false;
     this.answerScreen = false;
+  }
+
+  showFinalResults(): void {
+    this.questionScreen = false;
+    this.countdownScreen = false;
+    this.resultsScreen = false;
+    this.answerScreen = false;
+    this.finalResults = true;
   }
 }

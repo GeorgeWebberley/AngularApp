@@ -5,4 +5,6 @@ export interface Question {
   question: string;
   correctAnswer: number;
   answers: Answer[];
+  song?: string;
+  image?: string;
 }

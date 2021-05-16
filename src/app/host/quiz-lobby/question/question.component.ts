@@ -19,19 +19,20 @@ import {
       state(
         'center',
         style({
-          position: 'absolute',
-          top: '40vh',
-          fontSize: '8rem',
-          lineHeight: '8rem',
+          marginTop: '40vh',
+          fontFamily: 'Reggae One',
+          fontSize: '10vh',
+          lineHeight: '10vh',
+          width: '100vw',
         })
       ),
       state(
         'top',
         style({
-          top: '50px',
           fontFamily: 'Reggae One',
-          fontSize: '3rem',
-          lineHeight: '3.5rem',
+          fontSize: '6vh',
+          lineHeight: '6vh',
+          width: '60vw',
         })
       ),
       transition('center => top', [animate('2s ease')]),
@@ -67,18 +68,15 @@ export class QuestionComponent implements OnInit {
 
   timer = false;
 
-  backgroundSong: any;
   whooshSound: any;
   countdownSound: any;
+  mobile = false;
 
   options: AnimationOptions = {
     path: '/assets/animations/countdown.json',
   };
 
   constructor() {
-    this.backgroundSong = new Audio();
-    this.backgroundSong.src = 'assets/sounds/jazz.mp3';
-    this.backgroundSong.load();
     this.whooshSound = new Audio();
     this.whooshSound.src = 'assets/sounds/whoosh.flac';
     this.whooshSound.load();
@@ -88,7 +86,7 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.playAudio();
+    this.mobile = window.innerWidth < 500;
     setTimeout(() => {
       this.firstView = false;
       this.startTimer();
@@ -121,10 +119,6 @@ export class QuestionComponent implements OnInit {
       this.timer = false;
       this.questionFinishedEmitter.emit();
     }, 10000);
-  }
-
-  playAudio() {
-    this.backgroundSong.play();
   }
 
   answer(number): string | number {

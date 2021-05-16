@@ -1,18 +1,39 @@
+.question-container {
+  padding: 3rem;
+  @media only screen and (max-width: 600px) {
+    padding: 1rem;
+  }
+}
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 .title {
   font-family: "Reggae One", cursive;
   font-size: 3rem;
   line-height: 3.5rem;
-  position: absolute;
-  top: 50px;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    margin-top: 20px;
+  }
 }
 
 .margin-top {
-  margin-top: 150px;
+  margin-top: 50px;
+  @media only screen and (max-width: 600px) {
+    margin-top: 20px;
+  }
 }
 
 .answer-container {
   width: 100%;
   padding: 4rem 3rem;
+  @media only screen and (max-width: 600px) {
+    padding: 1rem;
+  }
 }
 
 .answer {
@@ -20,10 +41,6 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  font-family: "Reggae One", cursive;
-  color: white;
-  font-size: 2rem;
-  line-height: 2.5rem;
 }
 
 .rounded {
@@ -46,4 +63,7 @@
 .container {
   margin-top: 50px;
   width: 300px;
+  @media only screen and (max-width: 600px) {
+    width: 150px;
+  }
 }

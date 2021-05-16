@@ -1,12 +1,21 @@
 <div
   *ngIf="title"
-  class="d-flex flex-column align-items-center justify-content-center p-5"
+  class="
+    d-flex
+    flex-column
+    align-items-center
+    justify-content-center
+    answer-container
+  "
 >
-  <h1 class="text-white title my-5">The correct answer is...</h1>
+  <h1 class="text-white title quiz-title">The correct answer is...</h1>
 </div>
 <div
   *ngIf="!title && correctAnswer"
-  class="d-flex flex-column align-items-center justify-content-center p-5"
+  class="d-flex flex-column align-items-center answer-container"
 >
-  <h1 class="text-white title my-5">{{ correctAnswer.answer }}</h1>
+  <h1 class="text-white quiz-title title">{{ correctAnswer.answer }}</h1>
+  <div class="d-flex vw-100 justify-content-center">
+    <img src="{{ 'assets/quiz-images/' + image }}" />
+  </div>
 </div>

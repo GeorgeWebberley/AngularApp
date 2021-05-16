@@ -22,15 +22,12 @@
 }
 
 .margin-top {
-  margin-top: 50px;
-  @media only screen and (max-width: 600px) {
-    margin-top: 20px;
-  }
+  margin-top: 10px;
 }
 
 .answer-container {
   width: 100%;
-  padding: 4rem 3rem;
+  padding: 2.8rem 2.5rem;
   @media only screen and (max-width: 600px) {
     padding: 1rem;
   }
@@ -61,7 +58,7 @@
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 30px;
   width: 300px;
   @media only screen and (max-width: 600px) {
     width: 150px;

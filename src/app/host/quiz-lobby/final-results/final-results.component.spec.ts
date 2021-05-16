@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FinalResultsComponent } from './final-results.component';
@@ -8,9 +9,9 @@ describe('FinalResultsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FinalResultsComponent ]
-    })
-    .compileComponents();
+      declarations: [FinalResultsComponent],
+      imports: [BrowserAnimationsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

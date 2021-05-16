@@ -80,7 +80,9 @@ export class FinalResultsComponent implements OnInit {
   ngOnInit(): void {
     this.cheering = new Audio();
     this.cheering.src = 'assets/sounds/cheer.mp3';
-    this.players.sort((a, b) => (a.score > b.score ? -1 : 1));
+    if (this.players) {
+      this.players.sort((a, b) => (a.score > b.score ? -1 : 1));
+    }
     this.startFinalResults();
   }
 

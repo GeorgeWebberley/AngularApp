@@ -122,8 +122,12 @@ export class QuestionComponent implements OnInit {
   }
 
   answer(number): string | number {
-    return this.currentQuestion.answers.find(
-      (answer) => answer.answerId == number
-    ).answer;
+    if (this.currentQuestion) {
+      return this.currentQuestion.answers.find(
+        (answer) => answer.answerId == number
+      ).answer;
+    } else {
+      return null;
+    }
   }
 }

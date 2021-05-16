@@ -64,7 +64,9 @@ export class ResultsScreenComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.players.sort((a, b) => (a.score > b.score ? -1 : 1));
+    if (this.players) {
+      this.players.sort((a, b) => (a.score > b.score ? -1 : 1));
+    }
     setTimeout(() => {
       this.startAnimation = true;
       this.pause();

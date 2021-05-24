@@ -7,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class CountdownComponent implements OnInit {
   @Output() valueEmitter = new EventEmitter();
+  countdownSound: any;
 
   index = 0;
 
@@ -17,6 +18,11 @@ export class CountdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    // Include this or not???
+    this.countdownSound = new Audio();
+    this.countdownSound.src = 'assets/sounds/threeTwoOne.wav';
+    this.countdownSound.play();
+    // ---------------------
     this.startCountDown();
   }
 

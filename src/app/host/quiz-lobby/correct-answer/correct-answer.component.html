@@ -15,7 +15,14 @@
   class="d-flex flex-column align-items-center answer-container"
 >
   <h1 class="text-white quiz-title title">{{ correctAnswer.answer }}</h1>
-  <div class="d-flex vw-100 justify-content-center">
+  <div class="d-flex vw-100 align-items-center justify-content-center image-container">
     <img src="{{ 'assets/quiz-images/' + image }}" />
   </div>
+    <button
+      (click)='this.answerFinishedEmitter.emit()'
+      type='button'
+      class="btn btn-primary btn-lg continue-button"
+    >
+      CONTINUE
+    </button>
 </div>

@@ -16,13 +16,13 @@ export class CorrectAnswerComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.title = false;
-      this.showResults();
+      // this.showResults();
     }, 3000);
   }
 
-  showResults(): void {
-    setTimeout(() => {
-      this.answerFinishedEmitter.emit();
-    }, 7000);
-  }
+  // showResults(): void {
+  //   setTimeout(() => {
+  //     this.answerFinishedEmitter.emit();
+  //   }, 7000);
+  // }
 }

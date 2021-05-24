@@ -1,4 +1,3 @@
-import { Question } from '../../entities/Question';
 import { GameService } from '../../services/game.service';
 import { PlayerState } from '../../state/player-state/player.state';
 import { Component, OnInit } from '@angular/core';
@@ -44,8 +43,6 @@ export class PlayerLobbyComponent implements OnInit {
       if (state.lobbyCode != this.lobbyCode) {
         this.router.navigate(['/players/join-lobby']);
       }
-      console.log(state, 'state');
-
       this.lobbyId = state.lobbyId;
       this.playerName = state.playerName;
       this.playerId = state.playerId;
@@ -56,12 +53,16 @@ export class PlayerLobbyComponent implements OnInit {
       .valueChanges()
       .subscribe((result) => {
         if (result === 'loading') {
+          // Question object will either be string 'loading' or the question itself
           this.loading = true;
         } else {
-          this.loading = false;
-          this.currentQuestion = result;
-          let timeStamp = new Date();
-          this.startTime = timeStamp.getTime();
+          // Added to account for delay due to animation when showing the answers to the question
+          setTimeout(() => {
+            this.loading = false;
+            this.currentQuestion = result;
+            let timeStamp = new Date();
+            this.startTime = timeStamp.getTime();
+          }, 2500);
         }
       });
   }
@@ -71,15 +72,17 @@ export class PlayerLobbyComponent implements OnInit {
     if (this.currentQuestion && answer == this.currentQuestion.correctAnswer) {
       let timeStamp = new Date();
       this.endTime = timeStamp.getTime();
+      // User gets 40 points for correct answer, plus a score between 1-10 for the speed of their answer (making total possible score 50)
+      // The total time to answer the question from the moment it appears on the screen is 11500ms
+      // 11500ms = 0 bonus points -> slowest answer
+      // 0ms == 10 bonus points -> fastest answer
+      let totalTime = this.endTime - this.startTime;
+      // Calculates a score out of 10 based on the users time
+      let bonusPoints = Math.round(10 - (10 * totalTime) / 11500);
 
-      // To update this when calculate score based on time
-      let score = 1;
-
+      // Add 40 for a correct answer
+      let score = 40 + bonusPoints;
       this.gameService.postScore(this.lobbyId, this.playerId, score);
     }
-  }
-
-  getScore(): number {
-    return 1;
   }
 }

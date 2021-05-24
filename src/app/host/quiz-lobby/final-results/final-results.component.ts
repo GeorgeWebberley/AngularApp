@@ -2,7 +2,6 @@ import { Player } from './../../../entities/Player';
 import {
   animate,
   keyframes,
-  state,
   style,
   transition,
   trigger,

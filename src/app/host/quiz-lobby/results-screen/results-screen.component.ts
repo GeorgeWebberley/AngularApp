@@ -57,9 +57,11 @@ export class ResultsScreenComponent implements OnInit {
   @Input() players: Player[];
   @Input() exitButton: boolean;
   @Output() resultsFinishedEmitter = new EventEmitter();
+  @Output() gameFinished = new EventEmitter();
 
   startAnimation = false;
-  displayButton = false;
+  displayExitButton = false;
+  displayContinueButton = false;
 
   constructor() {}
 
@@ -73,17 +75,18 @@ export class ResultsScreenComponent implements OnInit {
     }, 1500);
   }
 
+  // Waits for 3 seconds before proceeding. If the final results, will instead show the exit button
   pause(): void {
     setTimeout(() => {
       if (this.exitButton) {
-        this.displayButton = true;
+        this.displayExitButton = true;
       } else {
-        this.resultsFinishedEmitter.emit();
+        this.displayContinueButton = true;
       }
-    }, 3000);
+    }, 1500);
   }
 
   exitGame(): void {
-    console.log('GAME FINISHED!!');
+    this.gameFinished.emit();
   }
 }

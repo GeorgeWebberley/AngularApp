@@ -16,6 +16,7 @@
   ></app-correct-answer>
   <app-results-screen
     (resultsFinishedEmitter)="resultsFinished()"
+    (gameFinished)="endGame()"
     *ngIf="resultsScreen"
     [players]="players"
     [exitButton]="exitButton"

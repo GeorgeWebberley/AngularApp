@@ -1,7 +1,7 @@
 .question-container {
-  padding: 3rem;
+  padding: 48px;
   @media only screen and (max-width: 600px) {
-    padding: 1rem;
+    padding: 16px;
   }
 }
 
@@ -27,7 +27,7 @@
 
 .answer-container {
   width: 100%;
-  padding: 2.8rem 2.5rem;
+  padding: 2.2rem 2rem;
   @media only screen and (max-width: 600px) {
     padding: 1rem;
   }
@@ -58,8 +58,8 @@
 }
 
 .container {
-  margin-top: 30px;
-  width: 300px;
+  margin-top: 20px;
+  width: 200px;
   @media only screen and (max-width: 600px) {
     width: 150px;
   }

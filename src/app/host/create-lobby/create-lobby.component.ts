@@ -4,17 +4,33 @@ import { Player } from './../../entities/Player';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-create-lobby',
   templateUrl: './create-lobby.component.html',
   styleUrls: ['./create-lobby.component.scss'],
+  animations: [
+    trigger('nameEnter', [
+      transition(':enter', [
+        animate(
+          '1s cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+          keyframes([
+            style({ transform: 'rotate(-360deg)', opacity: 0 }),
+            style({ transform: 'rotate({{rotate}})', opacity: 1 }),
+          ])
+        ),
+      ]),
+    ]),
+  ],
 })
 export class CreateLobbyComponent implements OnInit {
   lobbyCode: string;
   lobbyId: string;
   players: Player[];
   error = false;
+  backgroundSong: any;
+  beep: any;
 
   playerArray = [];
 
@@ -25,6 +41,11 @@ export class CreateLobbyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.backgroundSong = new Audio();
+    this.backgroundSong.src = 'assets/sounds/jazz.mp3';
+    this.backgroundSong.loop = true;
+    this.backgroundSong.play();
+
     this.lobbyCode = this.generateCode();
     this.gameService.createLobby(this.lobbyCode).then(
       this.gameService
@@ -41,11 +62,18 @@ export class CreateLobbyComponent implements OnInit {
                     (existingPlayer) => existingPlayer.name === player.name
                   )
                 ) {
+                  // Play a random sound (from beep1 to beep7) when a new player is added
+                  this.beep = new Audio();
+                  const randomInteger = Math.floor(Math.random() * 7) + 1 // there are 6 possible beep sounds
+                  this.beep.src = 'assets/sounds/beep' + randomInteger + '.wav';
+                  this.beep.play();
+                  // Create a player object that contains the name, score and the CSS for loading on the page
                   let playerObject = {};
                   // Css position
                   playerObject['left'] = this.getCSSPosition();
                   playerObject['top'] = this.getCSSPosition();
                   playerObject['rotation'] = this.getCSSRotation();
+                  playerObject['color'] = this.getRandomColor();
                   playerObject['score'] = 0;
                   playerObject['name'] = player.name;
                   this.playerArray.push(playerObject);
@@ -83,11 +111,25 @@ export class CreateLobbyComponent implements OnInit {
     return position;
   }
 
+  getRandomColor(): string {
+    return (
+      'hsl(' +
+      360 * Math.random() +
+      ',' +
+      '100%,' +
+      (60 + 10 * Math.random()) +
+      '%)'
+    );
+  }
+
   styleObject(player: any): Object {
+    console.log(player);
+
     return {
       top: player.top + '%',
       left: player.left + '%',
       transform: 'rotate(' + player.rotation + 'deg)',
+      color: player.color,
     };
   }
 
@@ -112,6 +154,7 @@ export class CreateLobbyComponent implements OnInit {
       this.error = true;
       return;
     }
+    this.backgroundSong.pause();
     this.store.dispatch(new SetPlayers(array));
     this.store.dispatch(new SetLobby(this.lobbyCode, this.lobbyId));
     this.router.navigate(['/host/quiz-lobby']);

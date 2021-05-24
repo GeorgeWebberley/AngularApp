@@ -4,12 +4,25 @@
 }
 
 img {
+  margin-top: 20px;
   height: 100%;
   width: auto;
-  max-height: calc(100vh - 150px);
+  max-height: calc(100vh - 170px);
   max-width: 90vw;
 }
 
+.image-container {
+  height: calc(100vh - 150px);;
+}
+
+
 .answer-container {
+  position: relative;
   padding: 25px;
+}
+
+.continue-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
 }

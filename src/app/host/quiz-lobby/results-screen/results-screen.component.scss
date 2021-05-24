@@ -1,6 +1,6 @@
 .score-container {
   min-width: 800px;
-  margin-top: 20vh;
+  margin-top: 10vh;
   overflow-y: scroll;
   @media only screen and (max-width: 600px) {
     width: 300px;
@@ -16,4 +16,10 @@
 
 .hide-overflow {
   max-width: 100%;
+}
+
+.continue-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
 }

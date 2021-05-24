@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HostRoutingModule } from './host-routing.module';
-import { HostComponent } from './host.component';
 import { CreateLobbyComponent } from './create-lobby/create-lobby.component';
 import { QuizLobbyComponent } from './quiz-lobby/quiz-lobby.component';
 import { CountdownComponent } from './quiz-lobby/countdown/countdown.component';
@@ -22,7 +21,6 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [
-    HostComponent,
     CreateLobbyComponent,
     QuizLobbyComponent,
     CountdownComponent,

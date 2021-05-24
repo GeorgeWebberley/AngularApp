@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Player } from './../../entities/Player';
 import { HostState } from './../../state/host-state/host.state';
 import { Question } from './../../entities/Question';
@@ -37,7 +38,11 @@ export class QuizLobbyComponent implements OnInit {
 
   @Select(HostState) state: Observable<any>;
 
-  constructor(private gameService: GameService, private store: Store) {}
+  constructor(
+    private gameService: GameService,
+    private store: Store,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.gameService
@@ -269,5 +274,10 @@ export class QuizLobbyComponent implements OnInit {
     this.resultsScreen = false;
     this.answerScreen = false;
     this.finalResults = true;
+  }
+
+  endGame(): void {
+    this.backgroundSong.pause();
+    this.router.navigate(['/home']);
   }
 }
